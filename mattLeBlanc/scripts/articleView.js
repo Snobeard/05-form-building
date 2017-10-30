@@ -82,10 +82,14 @@ articleView.initNewArticlePage = () => {
 
   // DONE: The new articles we create will be copy/pasted into our source data file.
   // Set up this "export" functionality. We can hide it for now, and show it once we have data to export.
-  $('#export-field').hide();
+  $('#article-export').hide();
+  $('#copyResponse').hide();
 
   $('#article-json').on('focus', function(){
     this.select();
+    document.execCommand('copy');
+    $('#copyResponse').show();
+    $('#copyResponse').fadeOut(3000);
   });
 
   // DONE: Add an event handler to update the preview and the export field if any inputs change.
@@ -93,7 +97,6 @@ articleView.initNewArticlePage = () => {
 };
 
 articleView.create = () => {
-  console.log('works?');
   // DONE: Set up a variable to hold the new article we are creating.
   // Clear out the #articles element, so we can put in the updated preview
   let newArticle;
@@ -105,9 +108,10 @@ articleView.create = () => {
     category: $('#article-category').val(),
     author: $('#article-author').val(),
     authorUrl: $('#article-author-url').val(),
-    body: $('#article-body').val(),
+    body: $('#article-body').val().replace(/^`{3}([^]*?)`{3}$/gm, '<pre><code class="html">$1</code></pre>'),
     publishedOn: $('#article-published:checked').length
   })
+  // console.log(newArticle.body.replace(/^`{3}([^]*?)`{3}$/gm, '<pre><code> $1' + '</pre></code>')); // <-- trying to replace  _```_ with _<pre><code>_ but can't seem to figure out how to get the ending </pre></code>
 
   // DONE: Use our interface to the Handblebars template to put this new article into the DOM:
   let articleTemplate = Handlebars.compile($('#article-template').html());
@@ -116,11 +120,11 @@ articleView.create = () => {
 
   // DONE: Activate the highlighting of any code blocks; look at the documentation for hljs to see how to do this by placing a callback function in the .each():
   $('pre code').each(function(i, block) {
-    hljs.highlightedBlock(block);
+    hljs.highlightBlock(block);
   });
 
   // DONE: Show our export field, and export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
-  $('#export-field').show();
+  $('#article-export').show();
   $('#article-json').val(JSON.stringify(newArticle));
 };
 

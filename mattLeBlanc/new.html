@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lab 5</title>
+    <link rel="stylesheet" href="vendor/styles/default.css">
     <link rel="stylesheet" href="vendor/styles/normalize.css">
     <link rel="stylesheet" href="styles/icons.css">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
     <!-- NOTE (stretch goal): To fully incorporate the highlighting library "hljs" we need to fill the empty link tag below to refer to a CSS file that will handle our text highlighting -->
-    <link rel="stylesheet" href="vendor/styles/default.css">
     <!-- DONE: We want our new article form to be able to display a preview of the article that is being entered. Thus, we need code here that will recreate the same structure of our other articles. What do you think we need to add here? -->
 
     <script id="article-template" type="text/x-handlebars-template">
@@ -90,8 +90,9 @@
         <!-- Done: Refer to the preview image to see what we will be building here: we need a container of some kind to hold a JSON export of our article. Ideally this container would show only a incipit (short preview) of the JSON and also be clickable to allow easy selection of the text it holds. What kind of element could we use for this? -->
         <label id="export-field" class="pull-right">
           <input id="article-json" type="text" readonly>
-          Capy and paste this JSON into your array of articles!
+          'Click' to copy this JSON for use in your array of articles!
         </label>
+        <p id="copyResponse">JSON Copied</p>
       </section>
 
     </main>
@@ -114,5 +115,7 @@
 
     <!-- // COMMENT: What is this function doing? Why do we need it?
     // the initNewArticlePage() is initiating the newArticle page, so that it shows an example of your newly created article and creates a code so you can implement it into the index page -->
+  <script src="vendor/scripts/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
