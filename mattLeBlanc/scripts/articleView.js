@@ -108,10 +108,9 @@ articleView.create = () => {
     category: $('#article-category').val(),
     author: $('#article-author').val(),
     authorUrl: $('#article-author-url').val(),
-    body: $('#article-body').val().replace(/^`{3}([^]*?)`{3}$/gm, '<pre><code class="html">$1</code></pre>'),
+    body: $('#article-body').val().replace(/^`{3}\n([^]*?)`{3}$/gm, `<pre><code>$1</code></pre>`),
     publishedOn: $('#article-published:checked').length
   })
-  // console.log(newArticle.body.replace(/^`{3}([^]*?)`{3}$/gm, '<pre><code> $1' + '</pre></code>')); // <-- trying to replace  _```_ with _<pre><code>_ but can't seem to figure out how to get the ending </pre></code>
 
   // DONE: Use our interface to the Handblebars template to put this new article into the DOM:
   let articleTemplate = Handlebars.compile($('#article-template').html());
